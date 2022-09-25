@@ -20,7 +20,20 @@ const login = async (email, password) => {
   const token = createToken({ email });
   return { token };
 };
+  
+const newUser = async (displayName, email, password, image) => {
+  // const {displayName, email, password, image} = data
+  const result = await User.findOne({ where: { email } });
+  console.log(result, 'ssssssssssssssssssssssssssssssssssssssssssssss');
+  if (result) {
+    return { type: 409, message: 'User already registered' };
+  }
+  await User.create({ displayName, email, password, image });
+  const token = createToken({ displayName, email, image });
+  return { token };
+};
 
 module.exports = {
   login,
+  newUser,
 };
