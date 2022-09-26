@@ -6,7 +6,7 @@ const newCategory = async (name) => {
   return category;
 };
 
-const findAll= async () => {
+const findAll = async () => {
   const categorys = await Category.findAll();
   return categorys;
 };
