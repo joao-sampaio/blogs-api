@@ -16,7 +16,6 @@ const BlogPost = (sequelize, DataTypes) => {
     },
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
-    // updated: DataTypes.DATE,
   }, {   
     underscored: true,
     timestamps: true,
