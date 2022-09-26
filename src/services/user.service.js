@@ -19,14 +19,14 @@ const findById = async (id) => {
     };
   }
   const result = await User.findOne({
-    attributes: {exclude: ['password']},
-    where: {id}
+    attributes: { exclude: ['password'] },
+    where: { id },
   });
   if (!result) {
     return {
       type: 404,
-      message: 'User does not exist'
-    }
+      message: 'User does not exist',
+    };
   }
   return result;
 };

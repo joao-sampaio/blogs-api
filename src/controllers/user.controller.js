@@ -1,7 +1,7 @@
 const { users } = require('../services');
 
 const findById = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
   const result = await users.findById(id);
   if (result.type) {
     res.status(result.type).json({ message: result.message });
