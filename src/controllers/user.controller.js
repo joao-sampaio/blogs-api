@@ -1,5 +1,14 @@
 const { users } = require('../services');
 
+const findAll = async (req, res) => {
+  const result = await users.findAll();
+  if (result.type) {
+    res.status(result.type).json({ message: result.message });
+  } else {
+    res.status(200).json(result);
+  }
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   const result = await users.login(email, password);
@@ -21,6 +30,7 @@ const newUser = async (req, res) => {
 };
 
 module.exports = {
+  findAll,
   login,
   newUser,
 };
