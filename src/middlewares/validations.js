@@ -1,3 +1,13 @@
+const valCategoryName = (req, res, next) => {
+  const data = req.body;
+  const { name } = data;
+  if (!name) {
+    res.status(400).json({ message: '"name" is required' });
+  } else {
+    next();
+  }
+};
+
 const valDisplayName = (req, res, next) => {
   const data = req.body;
   const { displayName } = data;
@@ -29,6 +39,7 @@ const valEmail = async (req, res, next) => {
 };
 
 module.exports = {
+  valCategoryName,
   valDisplayName,
   valEmail,
   valPassword,
