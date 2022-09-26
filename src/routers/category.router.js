@@ -9,6 +9,7 @@ const { categorys } = require('../controllers');
 const { valCategoryName } = require('../middlewares/validations');
 
 router.post('/', valToken, valCategoryName, categorys.newCategory);
+router.get('/', valToken, categorys.findAll);
 // router.get('/', valToken, categorys.findAll);
 // router.get('/:id', valToken, categorys.findById);
 
