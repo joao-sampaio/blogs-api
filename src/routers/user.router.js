@@ -10,5 +10,6 @@ const { valDisplayName, valEmail, valPassword } = require('../middlewares/valida
 
 router.post('/', valDisplayName, valEmail, valPassword, users.newUser);
 router.get('/', valToken, users.findAll);
+router.get('/:id', valToken, users.findById);
 
 module.exports = router;

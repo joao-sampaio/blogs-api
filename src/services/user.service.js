@@ -18,7 +18,16 @@ const findById = async (id) => {
       message: 'Id field are missing',
     };
   }
-  const result = await User.findOne({ where: { id } });
+  const result = await User.findOne({
+    attributes: {exclude: ['password']},
+    where: {id}
+  });
+  if (!result) {
+    return {
+      type: 404,
+      message: 'User does not exist'
+    }
+  }
   return result;
 };
 

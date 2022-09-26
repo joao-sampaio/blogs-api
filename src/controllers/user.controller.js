@@ -1,5 +1,15 @@
 const { users } = require('../services');
 
+const findById = async (req, res) => {
+  const {id} = req.params
+  const result = await users.findById(id);
+  if (result.type) {
+    res.status(result.type).json({ message: result.message });
+  } else {
+    res.status(200).json(result);
+  }
+};
+
 const findAll = async (req, res) => {
   const result = await users.findAll();
   if (result.type) {
@@ -30,6 +40,7 @@ const newUser = async (req, res) => {
 };
 
 module.exports = {
+  findById,
   findAll,
   login,
   newUser,
