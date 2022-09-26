@@ -13,12 +13,11 @@ const valToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, secret);
-    console.log(decoded);
 
     const user = await users.findById(decoded.data.userId);
 
     if (!user) {
-      return res.status(401).json({ message: 'Erro ao procurar usuário do token.' });
+      return res.status(401).json({ message: 'Erro ao procurar usuário' });
     }
 
     req.user = user;

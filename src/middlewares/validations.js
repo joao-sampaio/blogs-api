@@ -1,3 +1,6 @@
+const { Op } = require('sequelize');
+const { Category } = require('../models');
+
 const valCategoryName = (req, res, next) => {
   const data = req.body;
   const { name } = data;
@@ -6,6 +9,35 @@ const valCategoryName = (req, res, next) => {
   } else {
     next();
   }
+};
+
+const valCategories = async (req, res, next) => {
+  const data = req.body;
+  const { categoryIds } = data;
+  if (categoryIds.length === 0) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  const test = await Category.findAll({
+    where: {
+      id: {
+        [Op.or]: categoryIds,
+      },
+    },
+  });
+  if (test.length !== categoryIds.length) {
+    return res.status(400).json({ message: '"categoryIds" not found' });
+  } 
+    next();
+  
+  // const testIds = categoryIds.map(async catId => {
+  //   return test
+  // });
+  // if (testIds.length !== categoryIds) {
+  //   return {type: 400, message: '"categoryIds" not found'}
+  // } else {
+  //   next();
+  // }
 };
 
 const valDisplayName = (req, res, next) => {
@@ -39,6 +71,7 @@ const valEmail = async (req, res, next) => {
 };
 
 module.exports = {
+  valCategories,
   valCategoryName,
   valDisplayName,
   valEmail,
